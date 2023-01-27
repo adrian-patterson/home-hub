@@ -1,11 +1,11 @@
 from fastapi import FastAPI
-from routes.sample import router as SampleRouter
+from routes.homehub import router as HomeHubRouter
 
 app = FastAPI(
-    title="Sample API",
-    description="Sample API to perform CRUD operations",
-    docs_url="/samples/docs",
-    openapi_url="/samples/docs/openapi.json",
+    title="Home Hub API",
+    description="API for controlling a home hub display",
+    docs_url="/docs",
+    openapi_url="/docs/openapi.json",
 )
 
 
@@ -13,4 +13,5 @@ app = FastAPI(
 async def health():
     return "Healthy"
 
-app.include_router(SampleRouter, tags=["Sample"], prefix="/samples")
+
+app.include_router(HomeHubRouter, tags=["Home Hub"], prefix="/homehub")
