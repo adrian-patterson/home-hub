@@ -3,24 +3,30 @@ from selenium import webdriver
 
 class HubController:
     def __init__(self) -> None:
-        self.options = webdriver.FirefoxOptions()
-        self.options.add_argument("--kiosk")
-        self.options.add_argument("disable-infobars")
-        self.options.add_argument("--disable-extensions")
-        self.options.add_argument("--disable-dev-shm-usage")
-        self.options.add_argument("--no-sandbox")
-        self.firefox_driver = None
+        self.chrome_options = webdriver.ChromeOptions()
+        self.chrome_options.add_argument("--kiosk")
+        self.chrome_options.add_argument("disable-infobars")
+        self.chrome_options.add_argument("--disable-extensions")
+        self.chrome_options.add_argument("--disable-dev-shm-usage")
+        self.chrome_options.add_argument("--no-sandbox")
+        self.chrome_driver = None
 
     def open_url(self, url: str) -> None:
-        if self.firefox_driver is not None:
-            del self.firefox_driver
+        new_driver = webdriver.Chrome(options=self.chrome_options)
+        new_driver.get(url)
 
-        self.firefox_driver = webdriver.Firefox(options=self.options)
-        self.firefox_driver.get(url)
+        if self.chrome_driver is not None:
+            del self.chrome_driver
+
+        self.chrome_driver = new_driver
 
     def is_browser_open(self) -> bool:
         try:
-            self.firefox_driver.current_url
+            self.chrome_driver.current_url
             return True
         except:
             return False
+
+    def close_browser(self) -> None:
+        if self.chrome_driver is not None:
+            del self.chrome_driver
