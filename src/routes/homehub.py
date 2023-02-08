@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel
 from utils.hubcontroller import HubController
 
 
