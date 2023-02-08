@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=Runs a home hub server
+Exec=gnome-terminal -e "bash -c '~/Documents/home-hub/scripts/run_homehub_server.sh;$SHELL'"
+Icon=system-run
+Name=HomeHub Server
+StartupNotify=true
+Type=Application
