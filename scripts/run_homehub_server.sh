@@ -2,5 +2,5 @@
 
 cd ./Documents/home-hub/scripts
 git pull origin main
-cd ./src
+cd ../src
 python3 __main__.py
