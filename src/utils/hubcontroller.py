@@ -6,12 +6,12 @@ class HubController:
         self.options = webdriver.ChromeOptions()
         self.options.add_experimental_option("useAutomationExtension", False)
         self.options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        self.options.add_argument("--no-sandbox")
         self.options.add_argument("--kiosk")
         self.options.add_argument("disable-infobars")
         self.options.add_argument("--disable-extensions")
         self.options.add_argument("--disable-gpu")
         self.options.add_argument("--disable-dev-shm-usage")
-        self.options.add_argument("--no-sandbox")
         self.chrome_driver = None
 
     def open_url(self, url: str) -> None:
