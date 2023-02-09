@@ -13,16 +13,18 @@ class HubController:
         self.chrome_options.add_argument("--disable-extensions")
         self.chrome_options.add_argument("--disable-dev-shm-usage")
         self.chrome_options.add_argument("--no-sandbox")
-        self.chrome_driver = None
+        self.chrome_driver: webdriver.Chrome = None
 
     def open_url(self, url: str) -> None:
-        new_driver = webdriver.Chrome(options=self.chrome_options)
-        new_driver.get(url)
+        if self.is_browser_open():
+            self.chrome_driver.quit()
 
+        self.chrome_driver = webdriver.Chrome(options=self.chrome_options)
+        self.chrome_driver.get(url)
+
+    def close_browser(self) -> None:
         if self.chrome_driver is not None:
-            del self.chrome_driver
-
-        self.chrome_driver = new_driver
+            self.chrome_driver.quit()
 
     def is_browser_open(self) -> bool:
         try:
@@ -30,7 +32,3 @@ class HubController:
             return True
         except:
             return False
-
-    def close_browser(self) -> None:
-        if self.chrome_driver is not None:
-            del self.chrome_driver

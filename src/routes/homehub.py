@@ -16,7 +16,7 @@ async def display_url(url: str):
 
 
 @router.get(
-    "/close", summary="Close browser if open", response_description="Success message"
+    "/clear", summary="Close browser if open", response_description="Success message"
 )
 async def close_display():
     hub_controller.close_browser()
