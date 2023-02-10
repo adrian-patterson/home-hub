@@ -1,3 +1,4 @@
+import os
 from selenium import webdriver
 
 
@@ -32,3 +33,9 @@ class HubController:
             return True
         except:
             return False
+
+    def sleep_display(self) -> None:
+        os.system("sleep 1; xset dpms force off")
+
+    def wake_up_display(self) -> None:
+        os.system("xset dpms force on")

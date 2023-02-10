@@ -8,10 +8,9 @@ app = FastAPI(
     openapi_url="/docs/openapi.json",
 )
 
+app.include_router(HomeHubRouter, tags=["Home Hub"], prefix="/homehub")
+
 
 @app.get("/scenes/healthz", tags=["Health"])
 async def health():
     return "Healthy"
-
-
-app.include_router(HomeHubRouter, tags=["Home Hub"], prefix="/homehub")

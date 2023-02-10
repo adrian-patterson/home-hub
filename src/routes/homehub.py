@@ -8,16 +8,34 @@ hub_controller = HubController()
 
 
 @router.post(
-    "/url", summary="Set display to given URL", response_description="The set URL"
+    "/browser/open",
+    summary="Open browser to given URL",
+    response_description="The opened URL",
 )
-async def display_url(url: str):
+async def open_url(url: str):
     hub_controller.open_url(url)
     return jsonable_encoder(url)
 
 
 @router.get(
-    "/clear", summary="Close browser if open", response_description="Success message"
+    "/browser/close",
+    summary="Close browser if open",
+    response_description="Success message",
 )
-async def close_display():
+async def close_browser():
     hub_controller.close_browser()
+    return Response("Success")
+
+
+@router.get(
+    "/sleep", summary="Turn off display", response_description="Success message"
+)
+async def sleep_display():
+    hub_controller.sleep_display()
+    return Response("Success")
+
+
+@router.get("/wake", summary="Wake up display", response_description="Success message")
+async def wake_up_display():
+    hub_controller.wake_up_display()
     return Response("Success")
