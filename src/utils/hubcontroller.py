@@ -4,6 +4,7 @@ from selenium import webdriver
 
 class HubController:
     def __init__(self) -> None:
+        # Initialize options which will give a clean full screen browser display
         self.chrome_options = webdriver.ChromeOptions()
         self.chrome_options.add_experimental_option("useAutomationExtension", False)
         self.chrome_options.add_experimental_option(
@@ -15,6 +16,10 @@ class HubController:
         self.chrome_options.add_argument("--disable-dev-shm-usage")
         self.chrome_options.add_argument("--no-sandbox")
         self.chrome_driver: webdriver.Chrome = None
+
+        # Don't allow display to sleep for the next 86400 seconds (24 hours)
+        os.system("xset s 86400")
+        os.system("xset dpms 86400 86400 86400")
 
     def open_url(self, url: str) -> None:
         if self.is_browser_open():
