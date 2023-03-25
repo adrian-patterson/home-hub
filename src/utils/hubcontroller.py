@@ -1,3 +1,4 @@
+import copy
 import os
 from selenium import webdriver
 
@@ -17,16 +18,23 @@ class HubController:
         self.chrome_options.add_argument("--no-sandbox")
         self.chrome_driver: webdriver.Chrome = None
 
+    def set_display_sleep_options(self):
         # Don't allow display to sleep for the next 86400 seconds (24 hours)
         os.system("xset s 86400")
         os.system("xset dpms 86400 86400 86400")
 
-    def open_url(self, url: str) -> None:
+    def open_url_attached(self, url: str) -> None:
         if self.is_browser_open():
             self.chrome_driver.quit()
 
         self.chrome_driver = webdriver.Chrome(options=self.chrome_options)
         self.chrome_driver.get(url)
+
+    def open_url_detached(self, url: str) -> None:
+        chrome_options = copy.copy(self.chrome_options)
+        chrome_options.add_experimental_option("detach", True)
+        chrome_driver = webdriver.Chrome(options=chrome_options)
+        chrome_driver.get(url)
 
     def close_browser(self) -> None:
         if self.chrome_driver is not None:
