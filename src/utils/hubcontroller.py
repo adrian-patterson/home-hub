@@ -15,7 +15,10 @@ class HubController:
         self.chrome_options.add_argument("disable-infobars")
         self.chrome_options.add_argument("--disable-extensions")
         self.chrome_options.add_argument("--disable-dev-shm-usage")
+        self.chrome_options.add_argument("--disable-popup-blocking")
+        self.chrome_options.add_argument("--ignore-certificate-errors")
         self.chrome_options.add_argument("--no-sandbox")
+        self.chrome_options.add_argument("--enable-features=ReaderMode")
         self.chrome_driver: webdriver.Chrome = None
 
     def set_display_sleep_options(self):
@@ -31,9 +34,13 @@ class HubController:
         self.chrome_driver.get(url)
 
     def open_url_detached(self, url: str) -> None:
-        chrome_options = copy.copy(self.chrome_options)
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_experimental_option("useAutomationExtension", False)
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_argument("disable-infobars")
         chrome_options.add_experimental_option("detach", True)
         chrome_driver = webdriver.Chrome(options=chrome_options)
+        chrome_driver.maximize_window()
         chrome_driver.get(url)
 
     def close_browser(self) -> None:
