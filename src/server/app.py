@@ -16,9 +16,9 @@ app.include_router(HomeHubRouter, tags=["Home Hub"], prefix="/homehub")
 async def startup_event():
     controller = HubController()
     controller.set_display_sleep_options()
-    controller.open_url_detached("http://homeassistant.local:8123")
+    controller.open_url_fullscreen_detached("http://homeassistant.local:8123")
 
 
-@app.get("/scenes/healthz", tags=["Health"])
+@app.get("/healthz", tags=["Health"])
 async def health():
     return "Healthy"

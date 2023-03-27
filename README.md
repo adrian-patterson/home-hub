@@ -38,10 +38,11 @@ The software was written to run on Raspbian OS, the default Raspberry Pi OS. How
     * Other OS's may not have chromium and may need extra installation
 
 Once this repo is cloned on the Pi (assuming a raspberry pi 4 with Raspbian installed), the following steps need to be taken:
-1. Install the chromium driver with `sudo apt -y install chromium-chromedriver`. This allows the HubController to open chrome windows
+1. Install chromium with `sudo apt -y install chromium-browser`. This allows the HubController to open chrome windows.
+2. Install firefox-esr with `sudo apt -y install firefox-esr`. This allows the HubController to open firefox windows.
 2. Install the python dependencies with `pip install -r requirements.txt`
 3. Take note of the folder where you have cloned the repo to
-4. Copy the `homehub.desktop` to the `/Desktop` folder
+4. Copy the `homehub.desktop` to the `/Desktop` folder. This makes a shortcut for starting up the server.
 5. Modify the path in `homehub.desktop` line 3 to reflect the path noted in step 2. This allows the desktop shortcut to find the script which starts the server
 6. Double click the shortcut and watch the HomeHub come to life!
 

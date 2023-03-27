@@ -13,7 +13,7 @@ hub_controller = HubController()
     response_description="The opened URL",
 )
 async def open_url(url: str):
-    hub_controller.open_url_attached(url)
+    hub_controller.open_url_kiosk_attached(url)
     return jsonable_encoder(url)
 
 
