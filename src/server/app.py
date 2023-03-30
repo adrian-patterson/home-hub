@@ -15,7 +15,6 @@ app.include_router(HomeHubRouter, tags=["Home Hub"], prefix="/homehub")
 @app.on_event("startup")
 async def startup_event():
     controller = HubController()
-    controller.set_display_sleep_options()
     controller.open_url_fullscreen_detached("http://homeassistant.local:8123")
 
 
